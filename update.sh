@@ -27,17 +27,14 @@ for version in \
   0.12.6 \
 ; do
 
-  # edition small (contains only wkhtmltopdf) or full (with wkhtmltopdf, wkhtmltoimage and lib)
+  # edition small (contains only wkhtmltopdf)
   for edition in \
     small \
-    full \
   ; do
 
     # Supported base images
     for image in \
       alpine:3.13.5 \
-      node:14.16.1-alpine3.13 \
-      python:3.9.5-alpine3.13 \
     ; do
       # Parse image string
       base="${image%%:*}"
@@ -130,7 +127,7 @@ for version in \
         docker build . -f "$dir/$file" -t "modulotechgroup/$imageName:$tag" \
         && docker push "modulotechgroup/$imageName:$tag" \
         && docker tag "modulotechgroup/$imageName:$tag" "hub.docker.com/modulotechgroup/$imageName:$tag" \
-        && docker push "ghcr.io/modulotechgroup/$imageName:$tag" \
+        && docker push "hub.docker.com/modulotechgroup/$imageName:$tag" \
         && echo "Successfully built and pushed modulotechgroup/$imageName:$tag" || echo "Building or pushing failed for modulotechgroup/$imageName:$tag"
       fi
 
