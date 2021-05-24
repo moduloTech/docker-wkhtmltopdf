@@ -119,19 +119,19 @@ for version in \
       file="Dockerfile_$tag"
 
       # Build container if needed
-      if ! docker_tag_exists "surnet/$imageName" "$tag"; then
+      if ! docker_tag_exists "modulotechgroup/$imageName" "$tag"; then
         # Prepare Dockerfile
         mkdir -p "$dir"
         { generated_warning; cat "$template"; } > "$dir/$file"
         sed -i.bak -e "$replaceRules" "$dir/$file"
 
         # Build container
-        echo "Starting build for surnet/$imageName:$tag"
-        docker build . -f "$dir/$file" -t "surnet/$imageName:$tag" \
-        && docker push "surnet/$imageName:$tag" \
-        && docker tag "surnet/$imageName:$tag" "ghcr.io/surnet/$imageName:$tag" \
-        && docker push "ghcr.io/surnet/$imageName:$tag" \
-        && echo "Successfully built and pushed surnet/$imageName:$tag" || echo "Building or pushing failed for surnet/$imageName:$tag"
+        echo "Starting build for modulotechgroup/$imageName:$tag"
+        docker build . -f "$dir/$file" -t "modulotechgroup/$imageName:$tag" \
+        && docker push "modulotechgroup/$imageName:$tag" \
+        && docker tag "modulotechgroup/$imageName:$tag" "hub.docker.com/modulotechgroup/$imageName:$tag" \
+        && docker push "ghcr.io/modulotechgroup/$imageName:$tag" \
+        && echo "Successfully built and pushed modulotechgroup/$imageName:$tag" || echo "Building or pushing failed for modulotechgroup/$imageName:$tag"
       fi
 
     done
